@@ -1,8 +1,8 @@
 `ifndef BLACKBOX_NAME
-`define BLACKBOX_NAME skullfet_logo
+`define BLACKBOX_NAME ttlogo
 `endif
 `ifndef BLACKBOX_INSTANCE
-`define BLACKBOX_INSTANCE um_skullfet_logo
+`define BLACKBOX_INSTANCE um_ttlogo
 `endif
 
 (* blackbox *) (* keep *)
