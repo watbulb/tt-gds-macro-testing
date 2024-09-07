@@ -4,7 +4,7 @@ A repository for testing blackbox GDS art integration into TT tiles.
 
 _Note: Work In Progress, see top of `config.json`_
 
-** Getting Started **
+**Getting Started**
 
 - Place your magic art designs in `mag/` or `gds/`
 - If your design is a `.mag`, run `make preproc <name_of_mag>`
@@ -16,7 +16,7 @@ make preproc skullfet_logo
 make harden_top
 ```
 
-** Things to be done **
+**Things to be done**
 
 - [ ] (Fix the flow properly stream out the GDS, GDS -> isn't including PR boundary)
 - [ ] (Dynamically generate macro inclusions into the config from a macros.cfg)
