@@ -15,7 +15,7 @@ _Note: Work In Progress, see top of `config.json`_
 ```bash
 git submodule update --init
 make preproc skullfet_logo
-make harden_top
+make tt_harden_top
 ```
 
 **Things to be done**
