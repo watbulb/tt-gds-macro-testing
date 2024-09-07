@@ -74,7 +74,7 @@ preproc: \
 tt_user_config:
 	./tt/tt_tool.py --create-user-config --openlane2
 
-tt_harden_top: tt_user_config
+tt_harden_top: preproc # tt_user_config
 	mkdir -p runs/$(TAGET_MACRO)
 	./tt/tt_tool.py --harden --openlane2
 
@@ -109,7 +109,7 @@ clean_final:
 
 clean_build:
 	@rm -rf runs/*
-	@rm -f  src/user_config.json
+	@rm -f  src/config_merged.json
 	@rm -rf slpp_all
 
 dist_clean: clean_final clean_build
