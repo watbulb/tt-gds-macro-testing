@@ -1,3 +1,5 @@
+![](../../workflows/gds/badge.svg)
+
 ## TT GDS Macro BlackBox Testing
 
 A repository for testing blackbox GDS art integration into TT tiles.
