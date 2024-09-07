@@ -30,7 +30,6 @@
       "Odb.WriteVerilogHeader",
       "Checker.PowerGridViolations",
       "Odb.RemoveRoutingObstructions",
-      "Odb.CheckDesignAntennaProperties",
       "Checker.TrDRC",
       "Odb.ReportWireLength",
       "Checker.WireLength",
@@ -49,7 +48,6 @@
   "RUN_LINTER": true,
   "LINTER_INCLUDE_PDK_MODELS": true,
   "CLOCK_PORT": "",
-  "//": "not used",
   "//ROUTING_OBSTRUCTIONS": [
     "met2 0 0 64 50",
     "met2 87 0 151 50",
