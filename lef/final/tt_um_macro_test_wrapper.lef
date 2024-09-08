@@ -23,14 +23,6 @@ MACRO tt_um_macro_test_wrapper
         RECT 0.000 0.000 0.000 0.000 ;
     END
   END VPWR
-  PIN VDPWR
-    DIRECTION INOUT ;
-    USE POWER ;
-    PORT
-      LAYER met4 ;
-        RECT 0.000 0.000 0.000 0.000 ;
-    END
-  END VDPWR
   PIN clk
     DIRECTION INPUT ;
     USE SIGNAL ;
