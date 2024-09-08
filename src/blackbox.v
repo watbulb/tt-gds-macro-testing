@@ -6,6 +6,11 @@
 `endif
 
 (* blackbox *) (* keep *)
-module `BLACKBOX_NAME ();
+module `BLACKBOX_NAME (
+`ifdef USE_POWER_PINS
+  input VPWR,
+  input VGND
+`endif
+);
 endmodule
 

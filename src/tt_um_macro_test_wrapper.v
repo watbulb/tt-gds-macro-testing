@@ -13,12 +13,12 @@ module tt_um_macro_test_wrapper (
     input  wire [7:0] uio_in,   // IOs: Input path
     output wire [7:0] uio_out,  // IOs: Output path
     output wire [7:0] uio_oe,   // IOs: Enable path (active high: 0=input, 1=output)
-    inout  wire [7:0] ua,       // Analog pins, only ua[5:0] can be used
+    // inout  wire [7:0] ua,       // Analog pins, only ua[5:0] can be used
     input  wire       ena,      // always 1 when the design is powered, so you can ignore it
     input  wire       clk,      // clock
     input  wire       rst_n     // reset_n - low to reset
 );
-  wire _unused = &{uo_out, uio_out, uio_oe, ua, 1'b0};
+  wire _unused = &{uo_out, uio_out, uio_oe, /*ua,*/ 1'b0};
   // instantiate the blackbox GDS macro 
   (* keep *) `BLACKBOX_NAME `BLACKBOX_INSTANCE ();
 endmodule

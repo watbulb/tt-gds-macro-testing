@@ -27,13 +27,16 @@ if __name__ == '__main__':
 
   # Delete output driver cells
   target_cell: gdspy.Cell = gdsii.cells[target_cellname]
+
   if "sky130_fd_sc_hd__buf_2" in gdsii.cells:
-    del gdsii.cells["sky130_fd_sc_hd__buf_2"]
+    gdsii.remove(gdsii.cells["sky130_fd_sc_hd__buf_2"])
     print("removing: sky130_fd_sc_hd__buf_2")
+
   if "sky130_fd_sc_hd__conb_1" in gdsii.cells:
-    del gdsii.cells["sky130_fd_sc_hd__conb_1"]
+    gdsii.remove(gdsii.cells["sky130_fd_sc_hd__conb_1"])
     print("removing: sky130_fd_sc_hd__conb_1")
 
+  print(gdsii.cells)
   gdsii.write_gds(filepath)
   print("Success")
   

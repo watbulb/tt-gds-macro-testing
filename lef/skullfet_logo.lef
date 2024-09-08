@@ -7,22 +7,6 @@ MACRO skullfet_logo
   FOREIGN skullfet_logo ;
   ORIGIN 0.000 0.000 ;
   SIZE 78.500 BY 25.500 ;
-  PIN VPWR
-    DIRECTION INPUT ;
-    USE POWER ;
-    PORT
-      LAYER met3 ;
-        RECT 0.000 0.000 24.000 1.500 ;
-    END
-  END VPWR
-  PIN VGND
-    DIRECTION INPUT ;
-    USE GROUND ;
-    PORT
-      LAYER met3 ;
-        RECT 54.500 0.000 78.500 1.500 ;
-    END
-  END VGND
   OBS
       LAYER met1 ;
         RECT 0.000 9.500 78.500 25.500 ;
