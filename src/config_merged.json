@@ -1,0 +1,128 @@
+{
+  "//": "Only export pin area in LEF (without any connected nets)",
+  "meta": {
+    "version": 2,
+    "flow": [
+      "Verilator.Lint",
+      "Checker.LintTimingConstructs",
+      "Checker.LintErrors",
+      "Checker.LintWarnings",
+      "Yosys.JsonHeader",
+      "Yosys.Synthesis",
+      "Checker.YosysUnmappedCells",
+      "Checker.YosysSynthChecks",
+      "OpenROAD.CheckMacroInstances",
+      "OpenROAD.Floorplan",
+      "Odb.CheckMacroAntennaProperties",
+      "Odb.SetPowerConnections",
+      "Odb.ManualMacroPlacement",
+      "OpenROAD.CutRows",
+      "Odb.AddPDNObstructions",
+      "OpenROAD.GeneratePDN",
+      "Odb.RemovePDNObstructions",
+      "Odb.AddRoutingObstructions",
+      "OpenROAD.GlobalPlacementSkipIO",
+      "OpenROAD.IOPlacement",
+      "Odb.CustomIOPlacement",
+      "Odb.ApplyDEFTemplate",
+      "Odb.WriteVerilogHeader",
+      "Checker.PowerGridViolations",
+      "Odb.RemoveRoutingObstructions",
+      "Checker.TrDRC",
+      "Odb.ReportWireLength",
+      "Checker.WireLength",
+      "Magic.StreamOut",
+      "Magic.WriteLEF",
+      "Magic.DRC",
+      "KLayout.StreamOut",
+      "Checker.IllegalOverlap",
+      "Misc.ReportManufacturability"
+    ]
+  },
+  "PL_TARGET_DENSITY": 0.6,
+  "CLOCK_PERIOD": 20,
+  "PL_RESIZER_HOLD_SLACK_MARGIN": 0.1,
+  "GLB_RESIZER_HOLD_SLACK_MARGIN": 0.05,
+  "RUN_LINTER": true,
+  "LINTER_INCLUDE_PDK_MODELS": true,
+  "CLOCK_PORT": "",
+  "//ROUTING_OBSTRUCTIONS": [
+    "met2 0 0 64 50",
+    "met2 87 0 151 50",
+    "met2 0 52 64 104",
+    "met2 87 52 151 104"
+  ],
+  "MACROS": {
+    "ttlogo": {
+      "instances": {
+        "um_ttlogo": {
+          "location": [
+            50,
+            50
+          ],
+          "orientation": "N"
+        }
+      },
+      "gds": [
+        "dir::../gds/skullfet_logo.gds"
+      ],
+      "lef": [
+        "dir::../lef/skullfet_logo.lef"
+      ]
+    }
+  },
+  "FP_PDN_CFG": "dir::pdn_cfg.tcl",
+  "RUN_DRT": false,
+  "RUN_FILL_INSERTION": false,
+  "RUN_IRDROP_REPORT": false,
+  "RUN_POST_CTS_RESIZER_TIMING": false,
+  "RUN_POST_GRT_RESIZER_TIMING": false,
+  "GRT_REPAIR_ANTENNAS": false,
+  "FP_PDN_CHECK_NODES": false,
+  "FP_PDN_ENABLE_RAILS": false,
+  "PDN_ENABLE_GLOBAL_CONNECTIONS": false,
+  "IGNORE_DISCONNECTED_MODULES": [
+    "*"
+  ],
+  "ERROR_ON_LVS_ERROR": false,
+  "ERROR_ON_PDN_VIOLATIONS": false,
+  "MAGIC_MACRO_STD_CELL_SOURCE": "macro",
+  "RUN_KLAYOUT_XOR": 0,
+  "RUN_KLAYOUT_DRC": 0,
+  "PL_RESIZER_BUFFER_OUTPUT_PORTS": false,
+  "SYNTH_READ_BLACKBOX_LIB": 1,
+  "TOP_MARGIN_MULT": 2,
+  "BOTTOM_MARGIN_MULT": 1,
+  "LEFT_MARGIN_MULT": 6,
+  "RIGHT_MARGIN_MULT": 12,
+  "FP_SIZING": "absolute",
+  "GRT_ALLOW_CONGESTION": true,
+  "FP_IO_HLENGTH": 2,
+  "FP_IO_VLENGTH": 2,
+  "FP_PDN_VOFFSET": 1.04,
+  "FP_PDN_VPITCH": 16,
+  "FP_PDN_VSPACING": 6.4,
+  "DECAP_CELL": [
+    "sky130_fd_sc_hd__decap_3",
+    "sky130_fd_sc_hd__decap_4",
+    "sky130_fd_sc_hd__decap_6",
+    "sky130_fd_sc_hd__decap_8",
+    "sky130_ef_sc_hd__decap_12"
+  ],
+  "RUN_CTS": 0,
+  "DESIGN_IS_CORE": false,
+  "RT_MAX_LAYER": "met4",
+  "MAGIC_DEF_LABELS": false,
+  "MAGIC_WRITE_LEF_PINONLY": true,
+  "DESIGN_NAME": "tt_um_macro_test_wrapper",
+  "VERILOG_FILES": [
+    "dir::tt_um_macro_test_wrapper.v"
+  ],
+  "DIE_AREA": [
+    0,
+    0,
+    334.88,
+    225.76
+  ],
+  "FP_DEF_TEMPLATE": "dir::../tt/def/analog/tt_analog_2x2.def"
+}
