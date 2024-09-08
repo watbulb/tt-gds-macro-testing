@@ -65,12 +65,12 @@ $(TARGET_MACRO):
 # Conversion targets
 #
 $(GDS_MACROS_SRC):
-	./gds_add_pnb.py $@
+	./script/gds_add_pnb.py $@
 
 $(GDS_MACRO_PATH)/%.gds: $(MAG_MACRO_PATH)/%.mag
 	$(info MAG -> GDS)
 	echo "gds write \"$@\"" | magic -rcfile $(PDK_MAGICRC) -noconsole -dnull $<	
-	./gds_add_pnb.py $@
+	./script/gds_add_pnb.py $@
 
 $(LEF_MACRO_PATH)/%.lef: $(MAG_MACRO_PATH)/%.mag
 	$(info MAG -> LEF)
