@@ -1,8 +1,8 @@
 `ifndef BLACKBOX_NAME
-`define BLACKBOX_NAME ttlogo
+`define BLACKBOX_NAME blackbox
 `endif
 `ifndef BLACKBOX_INSTANCE
-`define BLACKBOX_INSTANCE um_ttlogo
+`define BLACKBOX_INSTANCE um_blackbox
 `endif
 
 (* blackbox *) (* keep *)

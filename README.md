@@ -8,13 +8,15 @@ _Note: Work In Progress, see top of `config.json`_
 
 **Getting Started**
 
+GDSPY is required to add boundary layers to GDS files: `apt install python3-gdspy`
+
 - Place your magic art designs in `mag/` or `gds/`
 - If your design is a `.mag`, run `make preproc <name_of_mag>`
   - This will produce GDS/LEF outputs used during a Openlane2 custom flow.
 
 ```bash
 git submodule update --init
-make preproc skullfet_logo
+make preproc ttlogo
 make tt_harden_top
 ```
 

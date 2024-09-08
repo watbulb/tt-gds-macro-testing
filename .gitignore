@@ -1,2 +1,4 @@
 runs
 venv
+src/config_merged.json
+render/*

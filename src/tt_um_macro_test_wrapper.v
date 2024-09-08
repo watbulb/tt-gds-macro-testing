@@ -18,11 +18,7 @@ module tt_um_macro_test_wrapper (
     input  wire       clk,      // clock
     input  wire       rst_n     // reset_n - low to reset
 );
-  assign uo_out  = '0;
-  assign uio_out = '0;
-  assign uio_oe  = '0;
-  wire _unused   = &{ena, clk, rst_n, ui_in, uio_in, /*ua,*/ 1'b0};
-
+  wire _unused = &{uo_out, uio_out, uio_oe, ua, 1'b0};
   // instantiate the blackbox GDS macro 
   (* keep *) `BLACKBOX_NAME `BLACKBOX_INSTANCE ();
 endmodule
