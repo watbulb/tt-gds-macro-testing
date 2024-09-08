@@ -35,6 +35,7 @@
       "Checker.WireLength",
       "Magic.StreamOut",
       "Magic.WriteLEF",
+      "Magic.DRC",
       "KLayout.StreamOut",
       "Checker.IllegalOverlap",
       "Misc.ReportManufacturability"
