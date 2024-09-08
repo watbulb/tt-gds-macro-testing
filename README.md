@@ -27,6 +27,8 @@ _Note: Work In Progress_
    - Edit the `VERILOG_DEFINES` and `MACROS` inside the config options to specify which macro you would like to place.
 5. Run `make tt_harden_top <my_macro_name>`
 
+DO NOT run this step if your design has existing digital logic, this is for pure art macro designs!
+
 6. The output of your design should now be in `runs/wokwi/final`, now one last thing needs to be done
 before submitting via adding your top-level macro to the `gds/final` folder. The output drivers need to
 be removed from the final GDS. This can be done using the following command:
