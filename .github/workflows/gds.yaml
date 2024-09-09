@@ -82,6 +82,8 @@ jobs:
       - name: Post-process Pure Art Design
         uses: workflow/nix-shell-action@v3
         env:
+          PDK_ROOT: /home/runner/pdk
+          PDK: sky130A
           PURE_ART: 1
           MACRO_NAME: ttlogo
           TOP_NAME: tt_um_macro_test_wrapper
