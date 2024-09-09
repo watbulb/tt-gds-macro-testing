@@ -1,6 +1,6 @@
 magic
 tech sky130A
-timestamp 1725862423
+timestamp 1725864046
 << checkpaint >>
 rect -530 926 1230 22706
 rect 4370 4370 6610 6190
@@ -52,7 +52,7 @@ rect 14383 22476 14413 22576
 rect 14659 22476 14689 22576
 rect 100 500 300 22076
 rect 400 500 600 22076
-use ttlogo  um_ttlogo
+use ttlogo  um_ttlogo mag/final
 timestamp 1554431724
 transform 1 0 5000 0 1 5000
 box 0 0 980 560

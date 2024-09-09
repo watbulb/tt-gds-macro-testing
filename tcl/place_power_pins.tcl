@@ -15,9 +15,13 @@ set POWER_STRIPES {
 set TOP_NAME   [file tail $::env(TOP_NAME)]
 set MACRO_NAME [file tail $::env(MACRO_NAME)]
 
+addpath gds/final
+addpath lef/final
+addpath mag/final
+
 # Load top-level mag
-load mag/final/${TOP_NAME}.mag
-lef read lef/final/${TOP_NAME}.lef
+load ${TOP_NAME}.mag
+lef read ${TOP_NAME}.lef
 
 # Load macro GDS
 gds read gds/${MACRO_NAME}.gds
@@ -60,6 +64,14 @@ foreach {name x} $POWER_STRIPES {
 
 # Save the layout and export MAG/GDS/LEF
 # ----------------------------------
-save mag/final/${TOP_NAME}
-gds write gds/final/${TOP_NAME}.gds
-lef write lef/final/${TOP_NAME}.lef -hide -pinonly
+save ${TOP_NAME}
+gds write ${TOP_NAME}.gds
+lef write ${TOP_NAME}.lef -hide -pinonly
+
+# there is no `file move ...`
+file copy -force ${TOP_NAME}.mag mag/final/${TOP_NAME}.mag
+file delete ${TOP_NAME}.mag
+file copy -force ${TOP_NAME}.gds gds/final/${TOP_NAME}.gds
+file delete ${TOP_NAME}.gds
+file copy -force ${TOP_NAME}.lef lef/final/${TOP_NAME}.lef
+file delete ${TOP_NAME}.lef

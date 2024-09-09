@@ -2,7 +2,7 @@ VERSION 5.7 ;
   NOWIREEXTENSIONATPIN ON ;
   DIVIDERCHAR "/" ;
   BUSBITCHARS "[]" ;
-  MACRO tt_um_macro_test_wrapper
+MACRO tt_um_macro_test_wrapper
   CLASS BLOCK ;
   FOREIGN tt_um_macro_test_wrapper ;
   ORIGIN 0.000 0.000 ;
