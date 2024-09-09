@@ -89,7 +89,7 @@ jobs:
         with:
           packages: magic-vlsi
           script: |
-            magic -rcfile $PDK_ROOT/$PDK/libs.tech/magic/sky130A.magicrc -noconsole -dnull ./tcl/place_power_pins.tcl
+            magic -noconsole -dnull -rcfile $PDK_ROOT/$PDK/libs.tech/magic/sky130A.magicrc ./tcl/place_power_pins.tcl
 
       - name: Copy submission files
         shell: bash
