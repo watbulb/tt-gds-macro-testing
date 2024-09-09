@@ -12,7 +12,7 @@ _Note: Work In Progress_
 - GDSPY: `apt install python3-gdspy`
   - required to add boundary layers to GDS files and to remove output driver cells: 
 - `rsvg-convert`: For SVG based input images
-
+- `magic` if your design is a pure art design, to manually add the VPWR, VGND nets and remove the output drivers.
 
 ## Getting Started
 
@@ -26,23 +26,10 @@ _Note: Work In Progress_
 4. Make a copy of `src/ttlogo_config.json` as `src/<my_macro_name>_config.json`
    - Edit the `VERILOG_DEFINES` and `MACROS` inside the config options to specify which macro you would like to place.
    - If you are using this to add a logo to an existing project, you need to delete the flow in the config, and use the normal classic flow.
-
-5. Run `make tt_harden_top <my_macro_name>`
-
-DO NOT run this step if your design has existing digital logic, this is for pure art macro designs!
-
-6. The output of your design should now be in `runs/wokwi/final`, now one last thing needs to be done
-before submitting via adding your top-level macro to the `gds/final` folder. The output drivers need to
-be removed from the final GDS. This can be done using the following command:
-    - `./script/gds_rm_outputs.py runs/wokwi/final/gds/tt_um_macro_test_wrapper.gds`
-    - _Note:_ Replace `tt_um_macro_test_wrapper` with the name of your top-level module.
-
-7. Now the final design files can be copied to `gds/final` and `lef/final`:
-
-```bash
-cp runs/wokwi/final/gds/tt_um_macro_test_wrapper.gds gds/final
-cp runs/wokwi/final/lef/tt_um_macro_test_wrapper.lef lef/final
-```
+5. Run `make tt_harden_top <my_macro_name>`.
+   - If your design in purely art, and has no logic, please do: `PURE_ART=1 make tt_harden_top <my_macro_name>`
+   - If you need to override the top module name set `TOP_NAME=` as well.
+6. The final designs are now made available in {gds,mag,lef}/final.
 
 ---
 

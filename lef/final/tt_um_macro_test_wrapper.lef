@@ -2,9 +2,9 @@ VERSION 5.7 ;
   NOWIREEXTENSIONATPIN ON ;
   DIVIDERCHAR "/" ;
   BUSBITCHARS "[]" ;
-MACRO tt_um_macro_test_wrapper
+MACRO mag/final/tt_um_macro_test_wrapper
   CLASS BLOCK ;
-  FOREIGN tt_um_macro_test_wrapper ;
+  FOREIGN mag/final/tt_um_macro_test_wrapper ;
   ORIGIN 0.000 0.000 ;
   SIZE 334.880 BY 225.760 ;
   PIN clk
@@ -351,22 +351,26 @@ MACRO tt_um_macro_test_wrapper
         RECT 74.830 224.760 75.130 225.760 ;
     END
   END uo_out[7]
+  PIN VPWR
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER met4 ;
+        RECT 1.000 5.000 3.000 220.760 ;
+    END
+  END VPWR
+  PIN VGND
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER met4 ;
+        RECT 4.000 5.000 6.000 220.760 ;
+    END
+  END VGND
   OBS
-      LAYER nwell ;
-        RECT -0.190 1.305 2.030 2.910 ;
-        RECT 0.000 0.105 2.030 1.305 ;
-        RECT 0.000 0.000 0.145 0.105 ;
-      LAYER pwell ;
-        RECT 0.145 -0.085 0.315 0.105 ;
-      LAYER nwell ;
-        RECT 0.315 0.000 2.030 0.105 ;
-      LAYER li1 ;
-        RECT 0.000 -0.085 1.840 2.805 ;
-      LAYER met1 ;
-        RECT 0.000 -0.240 1.840 2.960 ;
       LAYER met2 ;
         RECT 50.000 50.000 59.800 55.600 ;
   END
-END tt_um_macro_test_wrapper
+END mag/final/tt_um_macro_test_wrapper
 END LIBRARY
 

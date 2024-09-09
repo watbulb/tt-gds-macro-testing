@@ -31,6 +31,10 @@ MAG_MACROS_SRC := $(foreach macro,$(TARGET_MACRO),$(filter %$(macro).mag,$(MAG_S
 GDS_MACROS_SRC := $(foreach macro,$(TARGET_MACRO),$(filter %$(macro).gds,$(GDS_SOURCES)))
 LEF_MACROS_SRC := $(foreach macro,$(TARGET_MACRO),$(filter %$(macro).lef,$(LEF_SOURCES)))
 
+# Name of top module
+TOP_NAME ?= tt_um_macro_test_wrapper
+PURE_ART ?= 1
+
 ifeq ($(words $(MAKECMDGOALS)),2)
   # check if we have a mag or GDS for the macro
   ifeq ($(or $(MAG_MACROS_SRC),$(GDS_MACROS_SRC)),)
@@ -91,6 +95,10 @@ tt_harden_top: preproc
 	mkdir -p runs/$(TAGET_MACRO)
 	ln -sf $(TARGET_MACRO)_config.json src/config.json
 	./tt/tt_tool.py --harden --openlane2
+	cp runs/wokwi/final/gds/* gds/final/
+	cp runs/wokwi/final/mag/* mag/final/
+	cp runs/wokwi/final/lef/* lef/final/
+	PURE_ART=$(PURE_ART) TOP_NAME=$(TOP_NAME) MACRO_NAME=$(TARGET_MACRO) magic -noconsole -dnull ./tcl/place_power_pins.tcl
 
 tt_render_final:
 	mkdir -p render
