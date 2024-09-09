@@ -1,4 +1,5 @@
 # TODO steps for each type
+name: gds
 
 on:
   push:
@@ -30,16 +31,7 @@ jobs:
           PDK=sky130A
           FLOW=$FLOW
           EOF
-          if [ "$FLOW" == "openlane1" ]
-          then
-            echo "FLOW_ARG=" >> $GITHUB_ENV
-          elif [ "$FLOW" == "openlane2" ]
-          then
-            echo "FLOW_ARG=--openlane2" >> $GITHUB_ENV
-          else
-            echo "Invalid flow '$FLOW'" >&2
-            exit 1
-          fi
+          echo "FLOW_ARG=--openlane2" >> $GITHUB_ENV
   
       # Install packages for 'Render PNG from GDS' step:
       - name: Install prerequisites
@@ -71,16 +63,7 @@ jobs:
   
       - name: Install OpenLane
         shell: bash
-        run: |
-          if [ "$FLOW" == "openlane1" ]
-          then
-            git clone --depth=1 --branch $OPENLANE_TAG https://github.com/The-OpenROAD-Project/OpenLane.git $OPENLANE_ROOT
-            cd $OPENLANE_ROOT
-            make
-          elif [ "$FLOW" == "openlane2" ]
-          then
-            pip install openlane==$OPENLANE2_TAG
-          fi
+        run: pip install openlane==$OPENLANE2_TAG
 
       - name: Install Nix
         uses: rikhuijzer/cache-install@v1.1.4
@@ -103,6 +86,7 @@ jobs:
           cp runs/wokwi/final/gds/* gds/final/
           cp runs/wokwi/final/mag/* mag/final/
           cp runs/wokwi/final/lef/* lef/final/
+          nix-shell --run "find / -name magic"
           nix-shell --run "PURE_ART=1 TOP_NAME=$TOP_MODULE MACRO_NAME=ttlogo magic -noconsole -dnull ./tcl/place_power_pins.tcl"
           cp {gds,lef}/final/${TOP_MODULE}.* tt_submission/
 
