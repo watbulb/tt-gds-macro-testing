@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  gds:
+  gds_manual:
     runs-on: ubuntu-latest
     steps:
       - name: checkout repo
@@ -28,7 +28,7 @@ jobs:
           verilog_path: src/tt_um_macro_test_wrapper.v
   
   precheck:
-    needs: gds
+    needs: gds_manual
     runs-on: ubuntu-latest
     steps:
       - name: Run Tiny Tapeout Precheck

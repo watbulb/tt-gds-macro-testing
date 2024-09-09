@@ -3,6 +3,6 @@
   "VERILOG_FILES": [
     "dir::tt_um_macro_test_wrapper.v"
   ],
-  "DIE_AREA": [0, 0, 334.88, 225.76],
+  "DIE_AREA": "0 0 334.88 225.76",
   "FP_DEF_TEMPLATE": "dir::../tt/def/tt_block_2x2_pg.def"
 }

@@ -18,6 +18,17 @@ jobs:
         with:
           flow: openlane2
           tools-ref: tt08-micro-tiles-experiment
+
+      - name: Process pure art design
+        shell: bash
+        run: |
+          TOP_MODULE=$(./tt/tt_tool.py --print-top-module --openlane2)
+          cp runs/wokwi/final/gds/* gds/final/
+          cp runs/wokwi/final/mag/* mag/final/
+          cp runs/wokwi/final/lef/* lef/final/
+          PURE_ART=1 TOP_NAME=$TOP_MODULE MACRO_NAME=$(TARGET_MACRO) magic -noconsole -dnull ./tcl/place_power_pins.tcl
+          cp {gds,lef}/final/${TOP_MODULE}.* tt_submission/
+
   
   precheck:
     needs: gds
