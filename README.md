@@ -25,6 +25,8 @@ _Note: Work In Progress_
    - Additionally, a PN boundary layer will be added to any converted GDS or converted MAG during the preproc phase.
 4. Make a copy of `src/ttlogo_config.json` as `src/<my_macro_name>_config.json`
    - Edit the `VERILOG_DEFINES` and `MACROS` inside the config options to specify which macro you would like to place.
+   - If you are using this to add a logo to an existing project, you need to delete the flow in the config, and use the normal classic flow.
+
 5. Run `make tt_harden_top <my_macro_name>`
 
 DO NOT run this step if your design has existing digital logic, this is for pure art macro designs!
