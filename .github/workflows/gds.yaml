@@ -68,8 +68,8 @@ jobs:
       - name: Make GDS with OpenLane
         shell: bash
         run: |
-          apt update
-          apt install -y nix
+          sudo apt update
+          sudo apt install -y nix
           cp tt/precheck/default.nix .
           nix-build
           TOP_MODULE=$(./tt/tt_tool.py --print-top-module --openlane2)
