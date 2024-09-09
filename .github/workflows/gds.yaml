@@ -65,15 +65,11 @@ jobs:
         shell: bash
         run: pip install openlane==$OPENLANE2_TAG
 
-      - name: Install Nix
-        uses: rikhuijzer/cache-install@v1.1.4
-        with:
-          key: nix-${{ hashFiles('precheck/default.nix') }}
-          nix_file: 'tt/precheck/default.nix'
-
       - name: Make GDS with OpenLane
         shell: bash
         run: |
+          apt update
+          apt install -y nix
           cp tt/precheck/default.nix .
           nix-build
           TOP_MODULE=$(./tt/tt_tool.py --print-top-module --openlane2)
@@ -82,7 +78,7 @@ jobs:
           cp runs/wokwi/final/gds/* gds/final/
           cp runs/wokwi/final/mag/* mag/final/
           cp runs/wokwi/final/lef/* lef/final/
-          nix-shell --run "PURE_ART=1 TOP_NAME=$TOP_MODULE MACRO_NAME=ttlogo /nix/store/8myxsg9gpzam3cyykaqdcv2pbgzp48xs-magic-vlsi-8.3.447/bin/magic -noconsole -dnull ./tcl/place_power_pins.tcl"
+          nix-shell --run "PURE_ART=1 TOP_NAME=$TOP_MODULE MACRO_NAME=ttlogo magic -noconsole -dnull ./tcl/place_power_pins.tcl"
           cp {gds,lef}/final/${TOP_MODULE}.* tt_submission/
 
       - name: Show build files (for debugging)
