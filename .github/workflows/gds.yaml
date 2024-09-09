@@ -86,6 +86,7 @@ jobs:
         shell: bash
         run: |
           TOP_MODULE=$(./tt/tt_tool.py --print-top-module --openlane2)
+          pip install gdspy gdstk
           make tt_harden_top ttlogo
           cp runs/wokwi/final/gds/* gds/final/
           cp runs/wokwi/final/mag/* mag/final/
