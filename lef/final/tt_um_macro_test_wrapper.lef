@@ -7,22 +7,6 @@ MACRO tt_um_macro_test_wrapper
   FOREIGN tt_um_macro_test_wrapper ;
   ORIGIN 0.000 0.000 ;
   SIZE 334.880 BY 225.760 ;
-  PIN VGND
-    DIRECTION INOUT ;
-    USE GROUND ;
-    PORT
-      LAYER met4 ;
-        RECT 0.000 0.000 0.000 0.000 ;
-    END
-  END VGND
-  PIN VPWR
-    DIRECTION INOUT ;
-    USE POWER ;
-    PORT
-      LAYER met4 ;
-        RECT 0.000 0.000 0.000 0.000 ;
-    END
-  END VPWR
   PIN clk
     DIRECTION INPUT ;
     USE SIGNAL ;
@@ -380,10 +364,8 @@ MACRO tt_um_macro_test_wrapper
         RECT 0.000 -0.085 1.840 2.805 ;
       LAYER met1 ;
         RECT 0.000 -0.240 1.840 2.960 ;
-      LAYER met3 ;
-        RECT 50.000 50.000 128.500 51.500 ;
-      LAYER met4 ;
-        RECT 52.000 60.500 126.400 74.100 ;
+      LAYER met2 ;
+        RECT 50.000 50.000 59.800 55.600 ;
   END
 END tt_um_macro_test_wrapper
 END LIBRARY
