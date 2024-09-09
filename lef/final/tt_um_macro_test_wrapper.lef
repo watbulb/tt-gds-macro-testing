@@ -2,9 +2,9 @@ VERSION 5.7 ;
   NOWIREEXTENSIONATPIN ON ;
   DIVIDERCHAR "/" ;
   BUSBITCHARS "[]" ;
-MACRO mag/final/tt_um_macro_test_wrapper
+  MACRO tt_um_macro_test_wrapper
   CLASS BLOCK ;
-  FOREIGN mag/final/tt_um_macro_test_wrapper ;
+  FOREIGN tt_um_macro_test_wrapper ;
   ORIGIN 0.000 0.000 ;
   SIZE 334.880 BY 225.760 ;
   PIN clk
@@ -371,6 +371,6 @@ MACRO mag/final/tt_um_macro_test_wrapper
       LAYER met2 ;
         RECT 50.000 50.000 59.800 55.600 ;
   END
-END mag/final/tt_um_macro_test_wrapper
+END tt_um_macro_test_wrapper
 END LIBRARY
 
