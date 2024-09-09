@@ -12,11 +12,14 @@ set POWER_STRIPES {
     VGND  4um
 }
 
-set TOP_NAME   [file tail $::env(TOP_NAME)]
-set MACRO_NAME [file tail $::env(MACRO_NAME)]
+set TOP_NAME   $::env(TOP_NAME)
+set MACRO_NAME $::env(MACRO_NAME)
 
+addpath gds
 addpath gds/final
+addpath lef
 addpath lef/final
+addpath mag
 addpath mag/final
 
 # Load top-level mag
@@ -24,7 +27,7 @@ load ${TOP_NAME}.mag
 lef read ${TOP_NAME}.lef
 
 # Load macro GDS
-gds read gds/${MACRO_NAME}.gds
+gds read ${MACRO_NAME}.gds
 
 # If we are pure art, we need to remove the output drivers from the template
 if { [info exists ::env(PURE_ART)] && $::env(PURE_ART) != "" } {
