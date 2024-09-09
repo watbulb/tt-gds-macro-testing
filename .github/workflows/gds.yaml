@@ -65,21 +65,29 @@ jobs:
         shell: bash
         run: pip install openlane==$OPENLANE2_TAG
 
-      - name: Make GDS with OpenLane
+      # - name: Make GDS with OpenLane
+      #   shell: bash
+      #   run: |
+      #     TOP_MODULE=$(./tt/tt_tool.py --print-top-module --openlane2)
+      #     pip install gdspy gdstk
+      #     make tt_harden_top ttlogo
+      #     cp runs/wokwi/final/gds/* gds/final/
+      #     cp runs/wokwi/final/mag/* mag/final/
+      #     cp runs/wokwi/final/lef/* lef/final/
+
+      - uses: cachix/install-nix-action@v18
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+
+      - uses: workflow/nix-shell-action@v3
+        with:
+          packages: magic-vlsi
+          script: |
+            PURE_ART=1 MACRO_NAME=ttlogo magic -noconsole -dnull ./tcl/place_power_pins.tcl
+
+      - name: Copy submission files
         shell: bash
-        run: |
-          sudo apt update
-          sudo apt install -y nix
-          sudo nix-channel --add https://nixos.org/channels/nixpkgs-unstable
-          sudo nix-channel --update
-          TOP_MODULE=$(./tt/tt_tool.py --print-top-module --openlane2)
-          pip install gdspy gdstk
-          make tt_harden_top ttlogo
-          cp runs/wokwi/final/gds/* gds/final/
-          cp runs/wokwi/final/mag/* mag/final/
-          cp runs/wokwi/final/lef/* lef/final/
-          sudo nix-shell -p magic-vlsi --run 'PURE_ART=1 MACRO_NAME=ttlogo magic -noconsole -dnull ./tcl/place_power_pins.tcl'
-          cp {gds,lef}/final/${TOP_MODULE}.* tt_submission/
+        run: cp {gds,lef}/final/${TOP_MODULE}.* tt_submission/
 
       - name: Show build files (for debugging)
         shell: bash
