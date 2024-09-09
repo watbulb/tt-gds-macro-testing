@@ -81,7 +81,19 @@ jobs:
           then
             pip install openlane==$OPENLANE2_TAG
           fi
-  
+
+      - name: Install Nix
+        uses: rikhuijzer/cache-install@v1.1.4
+        with:
+          key: nix-${{ hashFiles('precheck/default.nix') }}
+          nix_file: 'tt/precheck/default.nix'
+
+      # we need magic
+      - name: Build Nix packages
+        shell: bash
+        working-directory: tt/precheck
+        run: nix-build
+
       - name: Make GDS with OpenLane
         shell: bash
         run: |
@@ -91,7 +103,7 @@ jobs:
           cp runs/wokwi/final/gds/* gds/final/
           cp runs/wokwi/final/mag/* mag/final/
           cp runs/wokwi/final/lef/* lef/final/
-          PURE_ART=1 TOP_NAME=$TOP_MODULE MACRO_NAME=$(TARGET_MACRO) magic -noconsole -dnull ./tcl/place_power_pins.tcl
+          nix-shell --run "PURE_ART=1 TOP_NAME=$TOP_MODULE MACRO_NAME=ttlogo magic -noconsole -dnull ./tcl/place_power_pins.tcl"
           cp {gds,lef}/final/${TOP_MODULE}.* tt_submission/
 
       - name: Show build files (for debugging)
