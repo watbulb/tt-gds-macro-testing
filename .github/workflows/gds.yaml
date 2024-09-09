@@ -1,5 +1,4 @@
 # TODO steps for each type
-name: gds
 
 on:
   push:
@@ -9,12 +8,81 @@ jobs:
   gds:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout repo
+      - name: Set up environment variables
+        shell: bash
+        env:
+          FLOW: openlane2
+        run: |
+          # REMINDER: When updating the OpenLane version do not forget to change the PDKs used for
+          #           other actions in this repository precheck/action.yml, gl_test/action.yml,
+          #           and eqy_test/action.yml
+          #           PDK_VERSION=cd1748bb197f9b7af62a54507de6624e30363943
+          cat << EOF >> $GITHUB_ENV
+          OPENLANE_TAG=2024.04.22
+          OPENLANE_IMAGE_NAME=efabless/openlane:2024.04.22
+          OPENLANE_ROOT=/home/runner/openlane
+          OPENLANE2_TAG=2.0.8
+          PDK_ROOT=/home/runner/pdk
+          PDK=sky130A
+          FLOW=$FLOW
+          EOF
+          if [ "$FLOW" == "openlane1" ]
+          then
+            echo "FLOW_ARG=" >> $GITHUB_ENV
+          elif [ "$FLOW" == "openlane2" ]
+          then
+            echo "FLOW_ARG=--openlane2" >> $GITHUB_ENV
+          else
+            echo "Invalid flow '$FLOW'" >&2
+            exit 1
+          fi
+  
+      # Install packages for 'Render PNG from GDS' step:
+      - name: Install prerequisites
+        uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: librsvg2-bin pngquant # librsvg2-bin for rsvg-convert; pngquant for heavy PNG compression.
+          version: tt09 # I think naming a version builds a reusable packages cache for that name.
+  
+      - name: Checkout tt-support-tools repo
         uses: actions/checkout@v4
         with:
-          submodules: recursive
+          repository: "TinyTapeout/tt-support-tools"
+          path: tt
+          ref: "tt09"
+  
+      - name: Setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip' # caching pip dependencies
+  
+      - name: Install tt-support-tools dependencies
+        shell: bash
+        run: pip install -r tt/requirements.txt
+  
+      - name: Fetch verilog and build config
+        shell: bash
+        run: ./tt/tt_tool.py --create-user-config $FLOW_ARG
+  
+      - name: Install OpenLane
+        shell: bash
+        run: |
+          if [ "$FLOW" == "openlane1" ]
+          then
+            git clone --depth=1 --branch $OPENLANE_TAG https://github.com/The-OpenROAD-Project/OpenLane.git $OPENLANE_ROOT
+            cd $OPENLANE_ROOT
+            make
+          elif [ "$FLOW" == "openlane2" ]
+          then
+            pip install openlane==$OPENLANE2_TAG
+          fi
 
-      - name: Build Pure Art GDS
+      - name: Show build files (for debugging)
+        shell: bash
+        run: find runs/wokwi/
+  
+      - name: Make GDS with OpenLane
         shell: bash
         run: |
           TOP_MODULE=$(./tt/tt_tool.py --print-top-module --openlane2)
@@ -24,27 +92,19 @@ jobs:
           cp runs/wokwi/final/lef/* lef/final/
           PURE_ART=1 TOP_NAME=$TOP_MODULE MACRO_NAME=$(TARGET_MACRO) magic -noconsole -dnull ./tcl/place_power_pins.tcl
           cp {gds,lef}/final/${TOP_MODULE}.* tt_submission/
+  
+      - name: Show submission build files (for debugging)
+        shell: bash
+        run: find tt_submission/
  
   precheck:
     needs: gds
     runs-on: ubuntu-latest
     steps:
       - name: Run Tiny Tapeout Precheck
-        uses: TinyTapeout/tt-gds-action/precheck@tt08
+        uses: TinyTapeout/tt-gds-action/precheck@tt09
         with:
           tools-ref: tt08-micro-tiles-experiment
-
-  gl_test:
-    needs: gds
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout repo
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-
-      - name: GL test
-        uses: TinyTapeout/tt-gds-action/gl_test@tt08
 
   viewer:
     needs: gds
@@ -53,4 +113,4 @@ jobs:
       pages: write      # to deploy to Pages
       id-token: write   # to verify the deployment originates from an appropriate source
     steps:
-      - uses: TinyTapeout/tt-gds-action/viewer@tt08
+      - uses: TinyTapeout/tt-gds-action/viewer@tt09
