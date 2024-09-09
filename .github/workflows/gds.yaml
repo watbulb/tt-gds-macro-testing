@@ -68,7 +68,6 @@ jobs:
       - name: Make GDS with OpenLane
         shell: bash
         run: |
-          TOP_MODULE=$(./tt/tt_tool.py --print-top-module --openlane2)
           pip install gdspy gdstk
           ./tt/tt_tool.py --harden --openlane2
           cp runs/wokwi/final/gds/* gds/final/
@@ -90,11 +89,11 @@ jobs:
         with:
           packages: magic-vlsi
           script: |
-            magic -noconsole -dnull ./tcl/place_power_pins.tcl
+            magic -rcfile $PDK_ROOT/$PDK/libs.tech/magic/sky130A.magicrc -noconsole -dnull ./tcl/place_power_pins.tcl
 
       - name: Copy submission files
         shell: bash
-        run: cp {gds,lef}/final/${TOP_MODULE}.* tt_submission/
+        run: cp {gds,lef}/final/tt_um_macro_test_wrapper.* tt_submission/
 
       - name: Show build files (for debugging)
         shell: bash
