@@ -81,10 +81,6 @@ jobs:
           then
             pip install openlane==$OPENLANE2_TAG
           fi
-
-      - name: Show build files (for debugging)
-        shell: bash
-        run: find runs/wokwi/
   
       - name: Make GDS with OpenLane
         shell: bash
@@ -96,6 +92,10 @@ jobs:
           cp runs/wokwi/final/lef/* lef/final/
           PURE_ART=1 TOP_NAME=$TOP_MODULE MACRO_NAME=$(TARGET_MACRO) magic -noconsole -dnull ./tcl/place_power_pins.tcl
           cp {gds,lef}/final/${TOP_MODULE}.* tt_submission/
+
+      - name: Show build files (for debugging)
+        shell: bash
+        run: find runs/wokwi/
   
       - name: Show submission build files (for debugging)
         shell: bash
