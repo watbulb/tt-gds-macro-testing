@@ -1,4 +1,4 @@
-![](../../workflows/gds/badge.svg)
+![](../../workflows/gds_manual/badge.svg)
 
 ## TT GDS Macro BlackBox Testing
 
