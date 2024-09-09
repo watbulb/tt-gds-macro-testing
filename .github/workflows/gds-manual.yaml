@@ -1,4 +1,4 @@
-name: gds
+name: gds_manual
 
 on:
   push:
@@ -35,7 +35,7 @@ jobs:
         uses: TinyTapeout/tt-gds-action/precheck@tt09
 
   viewer:
-    needs: gds
+    needs: gds_manual
     runs-on: ubuntu-latest
     permissions:
       pages: write      # to deploy to Pages
