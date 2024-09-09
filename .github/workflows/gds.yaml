@@ -70,7 +70,7 @@ jobs:
         run: |
           TOP_MODULE=$(./tt/tt_tool.py --print-top-module --openlane2)
           pip install gdspy gdstk
-          make tt_harden_top ttlogo
+          ./tt/tt_tool.py --harden --openlane2
           cp runs/wokwi/final/gds/* gds/final/
           cp runs/wokwi/final/mag/* mag/final/
           cp runs/wokwi/final/lef/* lef/final/
@@ -108,8 +108,6 @@ jobs:
     steps:
       - name: Run Tiny Tapeout Precheck
         uses: TinyTapeout/tt-gds-action/precheck@tt09
-        with:
-          tools-ref: tt08-micro-tiles-experiment
 
   viewer:
     needs: gds
